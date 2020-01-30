@@ -1,13 +1,18 @@
-<div fxFlexFill fxLayout="column" style="padding: 5px">
-    <div fxFlex="none" style="border:2px solid black;">
-      <app-header></app-header>
-    </div>
-    
-      <div fxFlex style="border:2px solid black;">
-        <router-outlet></router-outlet>
-      </div>
-  
-    <div fxFlex="none"style="border:2px solid black;">
-      <app-footer></app-footer>
-    </div>
+<div fxFlexFill fxLayout="column">
+  <div fxFlex="none">
+    <app-header></app-header>
   </div>
+
+  <div fxFlex>
+    <div [hidden]="[displayMessage]" >
+      <mat-spinner></mat-spinner>
+      <span> {{message}} </span>
+    </div>
+
+    <router-outlet></router-outlet>
+  </div>
+
+  <div fxFlex="none">
+    <app-footer></app-footer>
+  </div>
+</div>

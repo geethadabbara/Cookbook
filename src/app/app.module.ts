@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
@@ -11,7 +12,13 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 const appRoutes = [
   { path: 'recipes', component: RecipeListComponent },
-  { path: 'cooking-tools', component: CookingToolsListComponent }
+  { path: 'cooking-tools', component: CookingToolsListComponent },
+  { path: 'article-list', loadChildren: () => import('./article/article.module').then(m => m.ArticleModule) },
+  {
+    path: '',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
@@ -24,6 +31,7 @@ const appRoutes = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(
       appRoutes, { enableTracing: true }
     ),
