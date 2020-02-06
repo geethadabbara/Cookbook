@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatToolbarModule, MatCardModule, MatCard, MatNavList,MatListModule, MatList } from '@angular/material';
+import { MatToolbarModule, MatCardModule, MatButtonModule, MatNavList, MatListModule, MatList } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material';
 
 
@@ -9,9 +9,14 @@ import { MatProgressSpinnerModule } from '@angular/material';
   imports: [
     CommonModule,
     MatToolbarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatButtonModule
   ],
-  exports: [MatToolbarModule,MatProgressSpinnerModule],
+  exports: [MatToolbarModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatButtonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class NgMaterialModule { }

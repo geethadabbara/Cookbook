@@ -1,0 +1,14 @@
+<mat-card class="recipe-card" tabindex="0">
+    <mat-card-header>
+        <mat-card-title> {{recipe.name}} </mat-card-title>
+        <mat-card-subtitle> {{recipe.mealType}} </mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+        <p>
+            {{recipe.description | truncate }}
+        </p>
+    </mat-card-content>
+        <mat-card-actions align="end"> <button  mat-raised-button color="accent">View</button> </mat-card-actions>
+
+</mat-card>
