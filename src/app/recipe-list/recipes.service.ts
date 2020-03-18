@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Recipe } from '../models/recipe';
 import { Observable, of } from 'rxjs';
+import {environment} from '../../environments/environment';
 
 const RECIPES: Recipe[] = [
-  { Id: 1, Name: 'name 1', Description: 'skjdfkdjfg lkdjgdfkg ', MealType: 'dinner' },
-  { Id: 2, Name: 'didkvnfn', Description: 'swoijfvn  dfj kjsdfnvv', MealType: 'Lunch' },
-  { Id: 3, Name: 'iweufhnv', Description: 'skjdfkdjfg lkdjgdfkg ', MealType: 'dinner' }
+  { id: 1, name: 'name 1', description: 'skjdfkdjfg lkdjgdfkg ', mealType: 'dinner' },
+  { id: 2, name: 'didkvnfn', description: 'swoijfvn  dfj kjsdfnvv', mealType: 'Lunch' },
+  { id: 3, name: 'iweufhnv', description: 'skjdfkdjfg lkdjgdfkg ', mealType: 'dinner' }
 ];
 
 @Injectable({
@@ -18,7 +19,7 @@ export class RecipesService {
 
   getRecipes(): Observable<Recipe[]> {
     // return of(RECIPES);
-    const url = "https://localhost:44364/api/Recipes";
+    const url = environment.baseUrl + environment.recipeUrl;
     const httpOptions = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin':  'https://localhost:44364',

@@ -1,8 +1,8 @@
-.cardList {
-    display: flex;
-    flex-direction: column;
+div {
+  padding:10px;
+}
+.list-header {
+  a {
+    margin-left: auto;
   }
-  /* Row Gap */
-  .cardList > *:not(:last-child) {
-    margin-bottom: 32px;
-  }
+}

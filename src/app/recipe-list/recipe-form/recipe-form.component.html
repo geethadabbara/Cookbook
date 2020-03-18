@@ -1,0 +1,60 @@
+<div>
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+        <label>
+            Name:
+            <input type="text" formControlName="name" required>
+        </label>
+        <label>
+            MealType:
+            <select formControlName="mealType" required>
+                <option>choose</option>
+                <option *ngFor="let el of mealOptions">
+                    {{el}}
+                </option>
+            </select>
+        </label>
+        <label>
+            Description:
+            <textarea aria-multiline="true" formControlName="description" required minlength="50"></textarea>
+        </label>
+        <br />
+        <br>
+        <div formArrayName="ingredients">
+            <label>
+                Ingredients:
+            </label>
+            <button type="button" mat-raised-button color="primary" (click)="addIngredient()">Add</button>
+            <span> / </span>
+            <button type="button" mat-raised-button color="primary" (click)="removeIngredient()">Remove</button>
+<br> <br>
+            <div *ngFor="let el of ingredients.controls; let i=index">
+                <div [formGroupName]="i">
+                    <label>
+                        Name
+                        <input type="text" formControlName="name" required>
+                    </label>
+                    <label>
+                        Quanity
+                        <input type="number" formControlName="quantity" required >
+                    </label>
+                    <label>
+                        Measure
+                        <select formControlName="measure" required >
+                            <option>select</option>
+                            <option> cup </option>
+                            <option> grams </option>
+                            <option> ml </option>
+                            <option> no </option>
+                        </select>
+                    </label>
+                </div>
+                <br><br>
+            </div>
+        </div>
+        <br>
+        <br />
+        <button type="submit" [disabled]="!recipeForm.valid" mat-raised-button color="accent"> Save </button> 
+    </form>
+    <div *ngIf = "recipeForm.valid">
+</div>
+</div>

@@ -12,7 +12,7 @@ export class RecipeCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log("recipe -", this.recipe);
+    console.log('recipe -', this.recipe);
   }
 
 }

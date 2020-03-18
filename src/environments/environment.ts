@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  version: 'Release',
+  baseUrl: 'http://beta.mycookbook.com',
+  production: false,
+  recipeUrl: '/api/Recipes'
 };
 
 /*
