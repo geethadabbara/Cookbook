@@ -78,7 +78,10 @@
           "configurations": {
             "production": {
               "browserTarget": "cook-book:build:production"
-            }
+            },
+            "local": {
+              "browserTarget": "cook-book:build:local"
+          }
           }
         },
         "extract-i18n": {

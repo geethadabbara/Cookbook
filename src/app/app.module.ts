@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,6 +15,8 @@ import { FooterComponent } from './footer/footer.component';
 import { RecipeCardComponent } from './recipe-list/recipe-card/recipe-card.component';
 import { TruncatePipe } from './util/truncate.pipe';
 import { RecipeFormComponent } from './recipe-list/recipe-form/recipe-form.component';
+import { Interceptor } from './core/interceptor';
+import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
 
 const appRoutes = [
   { path: 'recipes', component: RecipeListComponent },
@@ -28,6 +30,10 @@ const appRoutes = [
   }
 ];
 
+const httpInterceptorProviders = [
+  { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +43,8 @@ const appRoutes = [
     FooterComponent,
     RecipeCardComponent,
     TruncatePipe,
-    RecipeFormComponent
+    RecipeFormComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +57,9 @@ const appRoutes = [
     FlexLayoutModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    httpInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

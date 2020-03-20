@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Recipe } from 'src/app/models/recipe';
+import { Subscription } from 'rxjs';
+import { RecipesService } from '../recipes.service';
 
 @Component({
   selector: 'app-recipe-form',
@@ -7,7 +10,22 @@ import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./recipe-form.component.scss']
 })
 export class RecipeFormComponent implements OnInit {
-  mealOptions: string[] = ['Breakfast', 'Lunch', 'Snack', 'Dinner'];
+
+  subscription: Subscription;
+  recipe: Recipe = new Recipe();
+  mealOptions: any[] = [
+    { value: 'Breakfast', viewValue: 'Breakfast' },
+    { value: 'Lunch', viewValue: 'Lunch' },
+    { value: 'Snack', viewValue: 'Snack' },
+    { value: 'Dinner', viewValue: 'Dinner' }
+  ];
+  measures: any[] = [
+    { value: 'cup', viewValue: 'cup' },
+    { value: 'grams', viewValue: 'grams' },
+    { value: 'ml', viewValue: 'ml' },
+    { value: 'no', viewValue: 'no' }
+  ];
+
   recipeForm = this.fb.group({
     name: ['', Validators.required],
     description: ['', Validators.compose([Validators.required, Validators.minLength(50)])],
@@ -16,23 +34,31 @@ export class RecipeFormComponent implements OnInit {
       this.createIngredient()
     ])
   });
-  constructor(private fb: FormBuilder) { }
+
+  constructor(private fb: FormBuilder, private recipeService: RecipesService) { }
 
   ngOnInit(): void {
   }
-  onSubmit() {
-    console.log(this.recipeForm.value);
-    alert('Yayy!!!');
-  }
+
   get ingredients() {
     return this.recipeForm.get('ingredients') as FormArray;
   }
   addIngredient() {
     this.ingredients.push(this.createIngredient());
   }
+  onSubmit() {
+    // console.log(this.recipeForm.value);
+    this.recipe = this.recipeForm.value;
+    if (this.recipe != null) {
+      this.subscription = this.recipeService.save(this.recipe).subscribe((result) => {
+        console.log(result);
+      });
+    }
+    console.log(JSON.stringify(this.recipe));
+    // alert('Yayy! Submitted');
+  }
   removeIngredient() {
     this.ingredients.removeAt(this.ingredients.length - 1);
-
   }
   createIngredient(): FormGroup {
     return this.fb.group({
